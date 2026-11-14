@@ -12,17 +12,20 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
-@Entity
+//classe category q esta no PACOTE ENTITY
 
+//colocando um ANNOTATION @ENTITY para MAPEAR a classe CATEGORY
+//com as ANNOTATION do JPA... 
+@Entity
 @Table(name = "tb_category")
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-
+	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant createdAt;
 
@@ -37,7 +40,6 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 	
-
 	public Long getId() {
 		return id;
 	}
@@ -95,5 +97,9 @@ public class Category implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
+	
+	
+	
+	
 }
