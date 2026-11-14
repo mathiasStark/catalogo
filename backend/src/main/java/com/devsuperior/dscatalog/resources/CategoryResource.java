@@ -35,17 +35,23 @@ public class CategoryResource {
 	
 	@Autowired
 	private CategoryService service;
+	
+	// o @GETMAPPING e para dizer q o metodo FINDALL vai ser um METODO
+	// q sera solicitado PELO GET do navegador... ou SEJA PARA PEGAR
+	// dados
 	@GetMapping
-
 	public ResponseEntity<Page<CategoryDTO>> findAll(
-			Pageable pageable) {		
+			Pageable pageable) {
+		
 		Page<CategoryDTO> list = service.findAllPaged(pageable);
 
 		return ResponseEntity.ok().body(list);
 	}
 	
-	
-	
+	//
+	// criando um METODO/ENDPOINT para retornar uma CATEGORIA pelo o ID
+	// da CATEGORIA
+	//
 	@GetMapping(value = "/{id}")
 	// criando o METODO/ENDPOINT... ou seja uma ROTA q vai
 	// responder a uma SOLICITAÇÂO feita atraves do navegador
@@ -68,7 +74,8 @@ public class CategoryResource {
 	// o nome do metodo vai ser INSERT
 	@PostMapping
 	public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto) {
-		dto = service.insert(dto);		
+		dto = service.insert(dto);
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
 
@@ -81,10 +88,10 @@ public class CategoryResource {
 	// METODO/ENDPOINT PUT (putmapping), q é o METODO REST para ATUALIZACOES
 	// e a ROTA da ANNOTATION @PUTMAPPING vai ter o VALUE ID q é o ID
 	// da CATEGORY q queremos ATUALIZAR
+	//
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto) {
 		dto = service.update(id, dto);
-
 		return ResponseEntity.ok().body(dto);
 	}
 
